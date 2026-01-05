@@ -11,6 +11,8 @@ module MdRecord
       @categories.keys.flat_map do |category|
         if category_path(category).directory?
           category_files(category).map { |file| yield file, category }
+        else
+          []
         end
       end
     end
@@ -18,7 +20,7 @@ module MdRecord
     private
 
     def category_files(category)
-      Dir.glob(category_path(category).join("*.md"))
+      Dir.glob(category_path(category).join('*.md'))
     end
 
     def category_path(category)
